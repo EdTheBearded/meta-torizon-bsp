@@ -24,6 +24,10 @@ BBMASK += "/meta-synaptics/dynamic-layers/virtualization-layer/recipes-container
 
 PREFERRED_PROVIDER_virtual/dtb = ""
 
+# meta-synaptics only sets this in its own local.conf template, which we
+# don't use. Its swupdate image recipes fail to parse when it's unset.
+ENABLE_RESCUE_MODE ?= "0"
+
 IMAGE_CMD:ota-ext4:append () {
     # Clean up
     [ -f "${DEPLOY_DIR_IMAGE}/${SYNAIMG_DEPLOY_SUBDIR}/rootfs.subimg" ] && rm ${DEPLOY_DIR_IMAGE}/${SYNAIMG_DEPLOY_SUBDIR}/rootfs.subimg
